@@ -1,0 +1,10 @@
+build
+.gradle
+local.properties
+.idea
+.DS_Store
+oauth2library/sign.gradle
+oauth2library/build
+*.iml
+gradle.properties
+*.keystore
