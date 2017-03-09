@@ -27,7 +27,7 @@ Token token = client.refreshAccessToken("refresh-token");
 
 ### Builder options and parameters
 
-You can provide custom parameters to the builder
+Parameters for the builder
 
 ```java
 OAuth2Client.Builder builder = new OAuth2Client.Builder("client-id", "client-secret", "site")
