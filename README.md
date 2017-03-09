@@ -1,4 +1,6 @@
 # OkHttp OAuth2 client
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Release](https://jitpack.io/v/corcoran/okhttp-oauth2-client.svg)] (https://jitpack.io/#corcoran/okhttp-oauth2-client)
 
 ## Overview
 
