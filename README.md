@@ -1,4 +1,4 @@
-# OAuth2 client
+# OkHttp OAuth2 client
 
 ## Overview
 
