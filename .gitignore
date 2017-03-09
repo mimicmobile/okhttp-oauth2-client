@@ -8,3 +8,4 @@ oauth2library/build
 *.iml
 gradle.properties
 *.keystore
+*.asc
