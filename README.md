@@ -2,7 +2,7 @@
 
 ## Overview
 
-A modern oAuth2 library using OkHttp with resource owner password grant types and easy token refreshing.
+A modern Android oAuth2 library using OkHttp with resource owner password grant types and easy token refreshing.
 This library aims to provide a solution for the less commonly used resource owner password grant type as well as providing dynamic parameter support that can be used with frameworks that allow for more flexible and dynamic oAuth2 parameters (such as the [Django REST framework social oAuth2 library](https://github.com/PhilipGarnero/django-rest-framework-social-oauth2))
 
 ## Usage
