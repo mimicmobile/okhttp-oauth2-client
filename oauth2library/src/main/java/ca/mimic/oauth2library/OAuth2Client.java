@@ -73,12 +73,6 @@ public class OAuth2Client {
         return Access.getToken(this);
     }
 
-    public Token getCustomToken() throws IOException, OAuthException {
-        if (this.grantType == null)
-            this.grantType = Constants.GRANT_TYPE_PASSWORD;
-        return Access.getToken(this);
-    }
-
     OkHttpClient getOkHttpClient() {
         if (this.okHttpClient == null) {
             return new OkHttpClient();
