@@ -26,7 +26,6 @@ class AuthState {
 
     private int tokenType;
     private int position;
-    private boolean initialAuth;
 
     AuthState(int tokenType) {
         this.tokenType = tokenType;
@@ -57,7 +56,7 @@ class AuthState {
         return state[position] == AUTHORIZATION_AUTH;
     }
 
-    public int getTokenType() {
+    int getTokenType() {
         return tokenType;
     }
 }
