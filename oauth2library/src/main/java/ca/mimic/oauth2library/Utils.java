@@ -1,8 +1,5 @@
 package ca.mimic.oauth2library;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -15,46 +12,11 @@ import okhttp3.Response;
 
 import okhttp3.Route;
 
-import static ca.mimic.oauth2library.Constants.PARAM_ACCESS_TOKEN;
-import static ca.mimic.oauth2library.Constants.PARAM_EXPIRES_IN;
-import static ca.mimic.oauth2library.Constants.PARAM_REFRESH_TOKEN;
-import static ca.mimic.oauth2library.Constants.PARAM_SCOPE;
-import static ca.mimic.oauth2library.Constants.PARAM_TOKEN_TYPE;
-
 class Utils {
     private final static MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json");
 
     static boolean isJsonResponse(Response response) {
         return response.body() != null && response.body().contentType().equals(JSON_MEDIA_TYPE);
-    }
-
-    static Token getSuccessTokenFromJsonResponse(Response response) throws IOException, OAuthException {
-        String body = response.body().string();
-        try {
-            JSONObject jsonObj = new JSONObject(body);
-
-            long expiresIn = jsonObj.getLong(PARAM_EXPIRES_IN);
-            String tokenType = jsonObj.getString(PARAM_TOKEN_TYPE);
-            String accessToken = jsonObj.getString(PARAM_ACCESS_TOKEN);
-
-            String scope;
-            if (jsonObj.isNull(PARAM_SCOPE)) {
-                scope = null;
-            } else {
-                scope = jsonObj.getString(PARAM_SCOPE);
-            }
-
-            String refreshToken;
-            if (!jsonObj.has(PARAM_REFRESH_TOKEN)) {
-                refreshToken = null;
-            } else {
-                refreshToken = jsonObj.getString(PARAM_REFRESH_TOKEN);
-            }
-
-            return new Token(expiresIn, tokenType, refreshToken, accessToken, scope);
-        } catch (JSONException e) {
-            throw new OAuthException(e, response);
-        }
     }
 
     static Authenticator getAuthenticator(final OAuth2Client oAuth2Client,

@@ -60,14 +60,14 @@ public class OAuth2Client {
         return password;
     }
 
-    public Token refreshAccessToken(String refreshToken) throws IOException, OAuthException {
+    public OAuthResponse refreshAccessToken(String refreshToken) throws IOException {
         if (this.grantType == null)
             this.grantType = Constants.GRANT_TYPE_REFRESH;
         return Access.refreshAccessToken(refreshToken, this);
 
     }
 
-    public Token getAccessToken() throws IOException, OAuthException {
+    public OAuthResponse requestAccessToken() throws IOException {
         if (this.grantType == null)
             this.grantType = Constants.GRANT_TYPE_PASSWORD;
         return Access.getToken(this);

@@ -20,22 +20,27 @@ dependencies {
 
 ## Usage
 
-Grab a resource owner password grant type token
-
 ```java
-import ca.mimic.oauth2library.OAuth2Client;
-import ca.mimic.oauth2library.Token;
-
 OAuth2Client client = new OAuth2Client.Builder("username", "password", "client-id", "client-secret", "site").build();
-Token token = client.getAccessToken();
+OAuthResponse response = client.requestAccessToken();
 
+if (response.isSuccessful()) {
+    String accessToken = response.getAccessToken();
+    String refreshToken = response.getRefreshToken();
+} else {
+    OAuthError error = response.getOAuthError();
+    String errorMsg = error.getError();
+}
+
+response.getCode();   // HTTP Status code
 ```
 
 To refresh a token (defaults to "refresh_token" grant type)
 
 ```java
 OAuth2Client client = new OAuth2Client.Builder("client-id", "client-secret", "site").build();
-Token token = client.refreshAccessToken("refresh-token");
+OAuthResponse response = client.refreshAccessToken("refresh-token");
+String accessToken = response.getAccessToken();
 ```
 
 ### Builder options and parameters
@@ -73,45 +78,30 @@ Wrap with RxJava!
 
 ```java
 OAuth2Client.Builder builder = new OAuth2Client.Builder("client-id", "client-secret", "http://localhost:8000/auth/token");
-client = builder.build();
+final OAuth2Client client = builder.build();
 
-Observable<Token> observable = Observable.fromCallable(new Callable<Token>() {
+Observable<OAuthResponse> observable = Observable.fromCallable(new Callable<OAuthResponse>() {
     @Override
-    public Token call() throws Exception {
+    public OAuthResponse call() throws Exception {
         return client.refreshAccessToken("refresh-token");
     }
 });
 
-observable.subscribe(new Subscriber<Token>() {
+observable.subscribe(new Action1<OAuthResponse>() {
     @Override
-    public void onCompleted() {
-    }
-
-    @Override
-    public void onError(Throwable e) {
-    }
-
-    @Override
-    public void onNext(Token token) {
-        token.getAccessToken();
+    public void call(OAuthResponse oAuthResponse) {
+        oAuthResponse.getAccessToken();
     }
 });
 ```
 
-### **OAuthException**
-This library wraps JSON Exceptions and other errors in its own OAuthException
+### Extra response data
+OAuthResponse contains other potentially helpful data
 ```java
-try {
-    Token token = client.refreshAccessToken("");
-} catch (OAuthException e) {
-    Response okHttpResponse = e.getResponse();
-    okHttpResponse.code();                // Http status code
-    okHttpResponse.isSuccessful();
-    
-    String body = e.getResponseBody();    // Response body
-    
-    JSONException jsonException = e.getJsonException();
-}
+OAuthResponse response = client.requestAccessToken();
+response.getHttpResponse();   // OkHttp response
+response.getBody();           // Response body string
+response.isJsonResponse();    // Was JSON parsed?
 ```
 
 ### Acknowledgments

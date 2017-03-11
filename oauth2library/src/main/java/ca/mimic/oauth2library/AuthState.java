@@ -1,8 +1,8 @@
 package ca.mimic.oauth2library;
 
 class AuthState {
-    static final int ACCESS_TOKEN = 0;
-    static final int REFRESH_TOKEN = 1;
+    protected static final int ACCESS_TOKEN = 0;
+    protected static final int REFRESH_TOKEN = 1;
 
     private static final int NO_AUTH = 0;
     private static final int BASIC_AUTH = 1;
@@ -24,12 +24,9 @@ class AuthState {
 
     private int[] state;
 
-    private int tokenType;
     private int position;
 
     AuthState(int tokenType) {
-        this.tokenType = tokenType;
-
         switch (tokenType) {
             case ACCESS_TOKEN:
                 state = ACCESS_STATES;
@@ -40,23 +37,19 @@ class AuthState {
         }
     }
 
-    void nextState() {
+    protected void nextState() {
         position++;
     }
 
-    boolean isFinalAuth() {
+    protected boolean isFinalAuth() {
         return state[position] == FINAL_AUTH;
     }
 
-    boolean isBasicAuth() {
+    protected boolean isBasicAuth() {
         return state[position] == BASIC_AUTH;
     }
 
-    boolean isAuthorizationAuth() {
+    protected boolean isAuthorizationAuth() {
         return state[position] == AUTHORIZATION_AUTH;
-    }
-
-    int getTokenType() {
-        return tokenType;
     }
 }
