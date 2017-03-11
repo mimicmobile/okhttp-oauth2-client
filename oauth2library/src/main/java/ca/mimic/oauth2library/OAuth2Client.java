@@ -32,31 +32,31 @@ public class OAuth2Client {
         this.parameters = builder.parameters;
     }
 
-    String getScope() {
+    protected String getScope() {
         return scope;
     }
 
-    String getGrantType() {
+    protected String getGrantType() {
         return grantType;
     }
 
-    String getClientId() {
+    protected String getClientId() {
         return clientId;
     }
 
-    String getClientSecret() {
+    protected String getClientSecret() {
         return clientSecret;
     }
 
-    String getSite() {
+    protected String getSite() {
         return site;
     }
 
-    String getUsername() {
+    protected String getUsername() {
         return username;
     }
 
-    String getPassword() {
+    protected String getPassword() {
         return password;
     }
 
@@ -73,7 +73,7 @@ public class OAuth2Client {
         return Access.getToken(this);
     }
 
-    OkHttpClient getOkHttpClient() {
+    protected OkHttpClient getOkHttpClient() {
         if (this.okHttpClient == null) {
             return new OkHttpClient();
         } else {
@@ -81,7 +81,7 @@ public class OAuth2Client {
         }
     }
 
-    Map<String, String> getParameters() {
+    protected Map<String, String> getParameters() {
         if (parameters == null) {
             return new HashMap<>();
         } else {
@@ -89,7 +89,7 @@ public class OAuth2Client {
         }
     }
 
-    Map<String, String> getFieldsAsMap() {
+    protected Map<String, String> getFieldsAsMap() {
         Map<String, String> oAuthParams = new HashMap<>();
         oAuthParams.put(Constants.POST_CLIENT_ID, getClientId());
         oAuthParams.put(Constants.POST_CLIENT_SECRET, getClientSecret());

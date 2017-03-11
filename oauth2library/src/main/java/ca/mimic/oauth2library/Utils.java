@@ -15,11 +15,11 @@ import okhttp3.Route;
 class Utils {
     private final static MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json");
 
-    static boolean isJsonResponse(Response response) {
+    protected static boolean isJsonResponse(Response response) {
         return response.body() != null && response.body().contentType().equals(JSON_MEDIA_TYPE);
     }
 
-    static Authenticator getAuthenticator(final OAuth2Client oAuth2Client,
+    protected static Authenticator getAuthenticator(final OAuth2Client oAuth2Client,
                                           final AuthState authState) {
         return new Authenticator() {
             @Override
@@ -49,7 +49,7 @@ class Utils {
     }
 
 
-    static void postAddIfValid(FormBody.Builder formBodyBuilder, Map<String, String> params) {
+    protected static void postAddIfValid(FormBody.Builder formBodyBuilder, Map<String, String> params) {
         if (params == null) return;
 
         for (Map.Entry<String, String> entry : params.entrySet()) {

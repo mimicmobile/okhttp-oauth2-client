@@ -28,6 +28,7 @@ class AuthState {
 
     AuthState(int tokenType) {
         switch (tokenType) {
+            default:
             case ACCESS_TOKEN:
                 state = ACCESS_STATES;
                 break;
