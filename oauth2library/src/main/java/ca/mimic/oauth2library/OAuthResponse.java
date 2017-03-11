@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import okhttp3.Response;
 
-class OAuthResponse {
+public class OAuthResponse {
     private Response response;
     private String responseBody;
     private Token token;
