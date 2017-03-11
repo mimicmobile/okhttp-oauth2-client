@@ -1,6 +1,6 @@
 package ca.mimic.oauth2library;
 
-class OAuthError {
+public class OAuthError {
     protected String error;
     protected String error_description;
     protected String error_uri;
