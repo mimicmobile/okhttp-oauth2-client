@@ -12,6 +12,7 @@ public class OAuthResponse {
     private Token token;
     private OAuthError error;
     private boolean jsonParsed;
+    private Long expiresAt;
 
     protected OAuthResponse(Response response) throws IOException {
         this.response = response;
@@ -21,6 +22,9 @@ public class OAuthResponse {
             if (Utils.isJsonResponse(response)) {
                 if (response.isSuccessful()) {
                     token = new Gson().fromJson(responseBody, Token.class);
+
+                    if (token.expires_in != null)
+                        expiresAt = (token.expires_in * 1000) + System.currentTimeMillis();
                 } else {
                     error = new Gson().fromJson(responseBody, OAuthError.class);
                 }
@@ -43,12 +47,11 @@ public class OAuthResponse {
     }
 
     public Long getExpiresIn() {
-        return token != null ? (token.expires_at * 1000) + System.currentTimeMillis() :
-                System.currentTimeMillis();
+        return token != null ? token.expires_in : null;
     }
 
     public Long getExpiresAt() {
-        return token != null ? token.expires_at : null;
+        return expiresAt;
     }
 
     public String getTokenType() {
