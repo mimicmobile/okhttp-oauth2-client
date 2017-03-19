@@ -22,16 +22,27 @@ public class OAuthResponse {
             if (Utils.isJsonResponse(response)) {
                 if (response.isSuccessful()) {
                     token = new Gson().fromJson(responseBody, Token.class);
+                    jsonParsed = true;
 
                     if (token.expires_in != null)
                         expiresAt = (token.expires_in * 1000) + System.currentTimeMillis();
                 } else {
-                    error = new Gson().fromJson(responseBody, OAuthError.class);
-                }
+                    try {
+                        error = new Gson().fromJson(responseBody, OAuthError.class);
+                        jsonParsed = true;
+                    } catch (Exception e) {
+                        error = new OAuthError(e);
+                        jsonParsed = false;
 
-                jsonParsed = true;
+                    }
+                }
             }
         }
+    }
+
+    protected OAuthResponse(Exception e) {
+        this.response = null;
+        this.error = new OAuthError(e);
     }
 
     public boolean isSuccessful() {

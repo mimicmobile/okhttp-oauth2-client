@@ -43,6 +43,21 @@ OAuthResponse response = client.refreshAccessToken("refresh-token");
 String accessToken = response.getAccessToken();
 ```
 
+### Callbacks
+
+```java
+client.requestAccessToken(new OAuthResponseCallback() {
+    @Override
+    public void onResponse(OAuthResponse response) {
+        if (response.isSuccessful()) {
+            // response.getAccessToken();
+        } else {
+            // response.getOAuthError();
+        }
+    }
+});
+```
+
 ### Builder options and parameters
 
 Parameters for the builder

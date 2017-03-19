@@ -67,10 +67,42 @@ public class OAuth2Client {
 
     }
 
+    public void refreshAccessToken(final String refreshToken, final OAuthResponseCallback callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OAuthResponse response;
+                try {
+                    response = refreshAccessToken(refreshToken);
+                    callback.onResponse(response);
+                } catch (Exception e) {
+                    response = new OAuthResponse(e);
+                    callback.onResponse(response);
+                }
+            }
+        }).start();
+    }
+
     public OAuthResponse requestAccessToken() throws IOException {
         if (this.grantType == null)
             this.grantType = Constants.GRANT_TYPE_PASSWORD;
         return Access.getToken(this);
+    }
+
+    public void requestAccessToken(final OAuthResponseCallback callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OAuthResponse response;
+                try {
+                    response = requestAccessToken();
+                    callback.onResponse(response);
+                } catch (Exception e) {
+                    response = new OAuthResponse(e);
+                    callback.onResponse(response);
+                }
+            }
+        }).start();
     }
 
     protected OkHttpClient getOkHttpClient() {

@@ -55,7 +55,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'io.reactivex:rxjava:1.2.2'
 }
 
 def siteUrl = 'https://github.com/corcoran/okhttp-oauth2-client'
