@@ -14,7 +14,7 @@ The Gradle dependency is available via jCenter. jCenter is the default Maven rep
 ```gradle
 dependencies {
     // ... other dependencies here
-    compile 'ca.mimic:oauth2library:2.1.0'
+    compile 'ca.mimic:oauth2library:2.1.1'
 }
 ```
 
