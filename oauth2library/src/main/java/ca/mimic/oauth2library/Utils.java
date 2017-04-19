@@ -42,7 +42,7 @@ class Utils {
                 System.out.println("Authenticating for response: " + response);
                 System.out.println("Challenges: " + response.challenges());
                 return response.request().newBuilder()
-                        .addHeader(Constants.HEADER_AUTHORIZATION, credential)
+                        .header(Constants.HEADER_AUTHORIZATION, credential)
                         .build();
             }
         };
