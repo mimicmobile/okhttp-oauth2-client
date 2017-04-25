@@ -13,10 +13,9 @@ import okhttp3.Response;
 import okhttp3.Route;
 
 class Utils {
-    private final static MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json");
 
     protected static boolean isJsonResponse(Response response) {
-        return response.body() != null && response.body().contentType().equals(JSON_MEDIA_TYPE);
+        return response.body() != null && response.body().contentType().subtype().equals("json");
     }
 
     protected static Authenticator getAuthenticator(final OAuth2Client oAuth2Client,
@@ -42,7 +41,7 @@ class Utils {
                 System.out.println("Authenticating for response: " + response);
                 System.out.println("Challenges: " + response.challenges());
                 return response.request().newBuilder()
-                        .addHeader(Constants.HEADER_AUTHORIZATION, credential)
+                        .header(Constants.HEADER_AUTHORIZATION, credential)
                         .build();
             }
         };
