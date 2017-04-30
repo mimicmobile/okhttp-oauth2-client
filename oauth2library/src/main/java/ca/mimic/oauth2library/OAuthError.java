@@ -5,7 +5,7 @@ public class OAuthError {
     protected String error_description;
     protected String error_uri;
 
-    protected Exception exception;
+    protected transient Exception exception;
 
     public OAuthError(Exception e) {
         exception = e;

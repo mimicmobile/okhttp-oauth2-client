@@ -1,6 +1,6 @@
 package ca.mimic.oauth2library;
 
-import com.google.gson.Gson;
+import com.squareup.moshi.Moshi;
 
 import java.io.IOException;
 
@@ -20,15 +20,16 @@ public class OAuthResponse {
             responseBody = response.body().string();
 
             if (Utils.isJsonResponse(response)) {
+                Moshi moshi = new Moshi.Builder().build();
                 if (response.isSuccessful()) {
-                    token = new Gson().fromJson(responseBody, Token.class);
+                    token = moshi.adapter(Token.class).fromJson(responseBody);
                     jsonParsed = true;
 
                     if (token.expires_in != null)
                         expiresAt = (token.expires_in * 1000) + System.currentTimeMillis();
                 } else {
                     try {
-                        error = new Gson().fromJson(responseBody, OAuthError.class);
+                        error = moshi.adapter(OAuthError.class).fromJson(responseBody);
                         jsonParsed = true;
                     } catch (Exception e) {
                         error = new OAuthError(e);
