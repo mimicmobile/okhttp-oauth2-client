@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-version = "2.2.0"
+version = "2.3.0"
 
 android {
     compileSdkVersion 25
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 25
-        versionCode 5
+        versionCode 6
         versionName version
 
         consumerProguardFiles 'proguard-rules.txt'
