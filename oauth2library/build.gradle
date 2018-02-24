@@ -2,16 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-version = "2.3.1"
+version = "2.4.0"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 25
-        versionCode 7
+        versionCode 240
         versionName version
 
         consumerProguardFiles 'proguard-rules.txt'
@@ -44,18 +43,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
 
-    compile 'com.squareup.moshi:moshi:1.4.0'
+    implementation 'com.squareup.moshi:moshi:1.5.0'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 
 def siteUrl = 'https://github.com/corcoran/okhttp-oauth2-client'

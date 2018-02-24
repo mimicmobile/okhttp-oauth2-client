@@ -4,7 +4,7 @@ A modern Android oAuth2 library using OkHttp with resource owner password grant 
 This library aims to provide a solution for the less commonly used resource owner password grant type as well as providing dynamic parameter support that can be used with frameworks that allow for more flexible and dynamic oAuth2 parameters (such as the [Django REST framework social oAuth2 library](https://github.com/PhilipGarnero/django-rest-framework-social-oauth2))
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-yellow.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Release](https://jitpack.io/v/corcoran/okhttp-oauth2-client.svg)](https://jitpack.io/#corcoran/okhttp-oauth2-client)
+[![Release](https://jitpack.io/v/mimicmobile/okhttp-oauth2-client.svg)](https://jitpack.io/#mimicmobile/okhttp-oauth2-client)
 [![Download](https://api.bintray.com/packages/corcoran/maven/ca.mimic%3Aoauth2library/images/download.svg) ](https://bintray.com/corcoran/maven/ca.mimic%3Aoauth2library/_latestVersion)
 
 ## Gradle
@@ -14,7 +14,7 @@ The Gradle dependency is available via jCenter. jCenter is the default Maven rep
 ```gradle
 dependencies {
     // ... other dependencies here
-    compile 'ca.mimic:oauth2library:2.3.1'
+    compile 'ca.mimic:oauth2library:2.4.0'
 }
 ```
 
@@ -126,7 +126,7 @@ This library was inspired by the [android-oauth2-client](https://github.com/dani
 ## License
 
 ```
-Copyright 2017 Jeff Corcoran
+Copyright 2018 Mimic Mobile
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
