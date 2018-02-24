@@ -56,8 +56,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-def siteUrl = 'https://github.com/corcoran/okhttp-oauth2-client'
-def gitUrl = 'https://github.com/corcoran/okhttp-oauth2-client.git'
+def siteUrl = 'https://github.com/mimicmobile/okhttp-oauth2-client'
+def gitUrl = 'https://github.com/mimicmobile/okhttp-oauth2-client.git'
 group = "ca.mimic"
 description = 'A modern Android oAuth2 library using OkHttp with resource owner password grant types and easy token refreshing. This library aims to provide a solution for the less commonly used resource owner password grant type as well as providing dynamic parameter support that can be used with frameworks that allow for more flexible and dynamic oAuth2 parameters.'
 
