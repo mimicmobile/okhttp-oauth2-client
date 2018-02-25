@@ -16,4 +16,9 @@
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
 
+# Prevent proguard from stripping Moshi bits
+-keep class com.squareup.moshi.** { *; }
+-keep interface com.squareup.moshi.** { *; }
+-dontwarn com.squareup.moshi.**
+
 ##---------------End: proguard configuration for Gson  ----------
