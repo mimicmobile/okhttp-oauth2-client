@@ -42,7 +42,7 @@ open class OAuthResponse {
     public val scope: String?
         get() = if (token != null) token!!.scope else null
 
-    internal constructor(response: Response?) {
+    public constructor(response: Response?) {
         this.httpResponse = response
         response?.let {
             body = response.body()!!.string()
@@ -68,7 +68,7 @@ open class OAuthResponse {
         }
     }
 
-    internal constructor(e: Exception) {
+    public constructor(e: Exception) {
         this.httpResponse = null
         this.oAuthError = OAuthError(e)
     }

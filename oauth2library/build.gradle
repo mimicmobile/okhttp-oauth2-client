@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 def packageName = 'com.pillohealth'
-def libVersion = "3.0.2"
+def libVersion = "3.0.3"
 
 static def getTimestamp() {
     def currentDate = new Date()
