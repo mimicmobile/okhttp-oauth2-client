@@ -78,7 +78,7 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
         return Access.refreshAccessToken(refreshToken, this)
     }
 
-    override fun refreshAccessToken(refreshToken: String, callback: OAuthResponseCallback) =
+    fun refreshAccessToken(refreshToken: String, callback: OAuthResponseCallback) =
             AsyncTask.execute {
                 var response: OAuthResponse
                 try {
@@ -95,7 +95,7 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
         return Access.getToken(this)
     }
 
-    override fun requestAccessToken(callback: OAuthResponseCallback) =
+    fun requestAccessToken(callback: OAuthResponseCallback) =
             AsyncTask.execute {
                 var response: OAuthResponse
                 try {
