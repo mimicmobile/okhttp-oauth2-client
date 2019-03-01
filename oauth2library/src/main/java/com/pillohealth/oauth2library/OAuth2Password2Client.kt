@@ -7,7 +7,7 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate", "unused", "RedundantVisibilityModifier")
 open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2Client {
 
-    class Builder(internal val clientId: String, internal val clientSecret: String, internal val site: String) {
+    public class Builder(internal val clientId: String, internal val clientSecret: String, internal val site: String) {
 
         internal var scope: String? = null
         internal var grantType: String? = null
@@ -19,19 +19,19 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
 
         internal var parameters: Map<String, String>? = null
 
-        fun withGrantType(grantType: GrantType) = apply { this.grantType = grantType.toString() }
+        public fun withGrantType(grantType: GrantType) = apply { this.grantType = grantType.toString() }
 
-        fun withScope(scope: String) = apply { this.scope = scope }
+        public fun withScope(scope: String) = apply { this.scope = scope }
 
-        fun withUsername(username: String) = apply { this.username = username }
+        public fun withUsername(username: String) = apply { this.username = username }
 
-        fun withPassword(password: String) = apply { this.password = password }
+        public fun withPassword(password: String) = apply { this.password = password }
 
-        fun usingOkHttpClient(client: OkHttpClient) = apply { this.okHttpClient = client }
+        public fun usingOkHttpClient(client: OkHttpClient) = apply { this.okHttpClient = client }
 
-        fun withParameters(parameters: Map<String, String>) = apply { this.parameters = parameters }
+        public fun withParameters(parameters: Map<String, String>) = apply { this.parameters = parameters }
 
-        fun build() = OAuth2Password2Client(this)
+        public fun build() = OAuth2Password2Client(this)
 
     }
 
