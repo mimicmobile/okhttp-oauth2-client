@@ -1,8 +1,6 @@
 package com.pillohealth.oauth2library
 
-import com.squareup.moshi.Moshi
-
-import java.io.IOException
+import com.google.gson.Gson
 
 import okhttp3.Response
 
@@ -48,15 +46,15 @@ open class OAuthResponse {
             body = response.body()!!.string()
 
             if (Utils.isJsonResponse(response)) {
-                val moshi = Moshi.Builder().build()
+                val gson = Gson()
                 if (response.isSuccessful) {
-                    token = moshi.adapter(Token::class.java).fromJson(body!!)
+                    token = gson.fromJson(body!!, Token::class.java)
                     isJsonResponse = true
 
                     if (token!!.expires_in != null) expiresAt = token!!.expires_in!! * 1000 + System.currentTimeMillis()
                 } else {
                     try {
-                        oAuthError = moshi.adapter(OAuthError::class.java).fromJson(body!!)
+                        oAuthError = gson.fromJson(body!!, OAuthError::class.java)
                         isJsonResponse = true
                     } catch (e: Exception) {
                         oAuthError = OAuthError(e)

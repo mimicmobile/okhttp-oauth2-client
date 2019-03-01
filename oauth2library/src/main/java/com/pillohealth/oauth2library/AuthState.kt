@@ -16,10 +16,10 @@ internal class AuthState(tokenType: Int) {
         get() = state!![position] == AUTHORIZATION_AUTH
 
     init {
-        when (tokenType) {
-            ACCESS_TOKEN -> state = ACCESS_STATES
-            REFRESH_TOKEN -> state = REFRESH_STATES
-            else -> state = ACCESS_STATES
+        state = when (tokenType) {
+            ACCESS_TOKEN -> ACCESS_STATES
+            REFRESH_TOKEN -> REFRESH_STATES
+            else -> ACCESS_STATES
         }
     }
 
@@ -28,13 +28,13 @@ internal class AuthState(tokenType: Int) {
     }
 
     companion object {
-        internal val ACCESS_TOKEN = 0
-        internal val REFRESH_TOKEN = 1
+        internal const val ACCESS_TOKEN = 0
+        internal const val REFRESH_TOKEN = 1
 
-        private val NO_AUTH = 0
-        private val BASIC_AUTH = 1
-        private val AUTHORIZATION_AUTH = 2
-        private val FINAL_AUTH = 3
+        private const val NO_AUTH = 0
+        private const val BASIC_AUTH = 1
+        private const val AUTHORIZATION_AUTH = 2
+        private const val FINAL_AUTH = 3
 
         private val ACCESS_STATES = intArrayOf(NO_AUTH, BASIC_AUTH, AUTHORIZATION_AUTH, FINAL_AUTH)
 

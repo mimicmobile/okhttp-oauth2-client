@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 def packageName = 'com.pillohealth'
-def libVersion = "3.0.3"
+def libVersion = "3.1.0"
 
 static def getTimestamp() {
     def currentDate = new Date()
@@ -70,9 +70,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.squareup.okhttp3:okhttp:3.13.1'
-
-    compile 'com.squareup.moshi:moshi:1.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     testImplementation 'junit:junit:4.12'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
