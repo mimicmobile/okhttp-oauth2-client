@@ -22,7 +22,7 @@ internal object Access {
 
     private fun refreshTokenFromResponse(oAuth2PasswordClient: OAuth2Password2Client,
                                          request: Request): OAuthResponse {
-        return getTokenFromResponse(oAuth2PasswordClient, oAuth2PasswordClient.okHttpClient!!,
+        return getTokenFromResponse(oAuth2PasswordClient, oAuth2PasswordClient.getOkHttpClient(),
                 request, AuthState(AuthState.REFRESH_TOKEN))
 
     }
@@ -46,7 +46,7 @@ internal object Access {
 
     private fun getTokenFromResponse(oAuth2PasswordClient: OAuth2Password2Client,
                                      request: Request): OAuthResponse {
-        return getTokenFromResponse(oAuth2PasswordClient, oAuth2PasswordClient.okHttpClient!!,
+        return getTokenFromResponse(oAuth2PasswordClient, oAuth2PasswordClient.getOkHttpClient(),
                 request, AuthState(AuthState.ACCESS_TOKEN))
 
     }

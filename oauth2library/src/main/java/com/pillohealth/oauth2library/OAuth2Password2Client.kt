@@ -38,7 +38,7 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
     val clientId: String
     val clientSecret: String
     val site: String
-    internal val okHttpClient: OkHttpClient?
+    private var okHttpClient: OkHttpClient?
 
     val scope: String?
     var grantType: String? = null
@@ -107,7 +107,10 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
                 }
             }
 
-    protected fun getOkHttpClient() = this.okHttpClient ?: OkHttpClient()
+    fun getOkHttpClient(): OkHttpClient {
+        if (this.okHttpClient == null) this.okHttpClient = OkHttpClient()
+        return this.okHttpClient!!
+    }
 
     fun getParameters(): Map<String, String> = parameters ?: HashMap()
 
