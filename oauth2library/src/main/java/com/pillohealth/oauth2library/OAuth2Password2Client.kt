@@ -54,10 +54,18 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
             val oAuthParams = HashMap<String, String>()
             oAuthParams[Constants.POST_CLIENT_ID] = clientId
             oAuthParams[Constants.POST_CLIENT_SECRET] = clientSecret
-            oAuthParams[Constants.POST_GRANT_TYPE] = grantType!!
-            oAuthParams[Constants.POST_SCOPE] = scope!!
-            oAuthParams[Constants.POST_USERNAME] = username!!
-            oAuthParams[Constants.POST_PASSWORD] = password!!
+            grantType?.let {
+                oAuthParams[Constants.POST_GRANT_TYPE] = it
+            }
+            scope?.let {
+                oAuthParams[Constants.POST_SCOPE] = it
+            }
+            username?.let {
+                oAuthParams[Constants.POST_USERNAME] = it
+            }
+            password?.let {
+                oAuthParams[Constants.POST_PASSWORD] = it
+            }
             return oAuthParams
         }
 
