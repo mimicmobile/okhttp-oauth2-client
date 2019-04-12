@@ -7,7 +7,7 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate", "unused", "RedundantVisibilityModifier")
 open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2Client {
 
-    public class Builder(internal val clientId: String, internal val clientSecret: String, internal val site: String) {
+    public class Builder(internal val clientId: String, internal val clientSecret: String?, internal val site: String) {
 
         internal var scope: String? = null
         internal var grantType: String? = null
@@ -36,7 +36,7 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
     }
 
     val clientId: String
-    val clientSecret: String
+    val clientSecret: String?
     val site: String
     private var okHttpClient: OkHttpClient?
 
@@ -53,7 +53,9 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
         get() {
             val oAuthParams = HashMap<String, String>()
             oAuthParams[Constants.POST_CLIENT_ID] = clientId
-            oAuthParams[Constants.POST_CLIENT_SECRET] = clientSecret
+            clientSecret?.let {
+                oAuthParams[Constants.POST_CLIENT_SECRET] = it
+            }
             grantType?.let {
                 oAuthParams[Constants.POST_GRANT_TYPE] = it
             }
