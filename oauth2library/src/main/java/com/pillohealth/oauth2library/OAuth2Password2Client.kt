@@ -7,9 +7,10 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate", "unused", "RedundantVisibilityModifier")
 open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2Client {
 
-    public class Builder(internal val clientId: String, internal val clientSecret: String?, internal val site: String) {
+    public class Builder(internal val clientId: String, internal val site: String) {
 
         internal var scope: String? = null
+        internal var clientSecret: String? = null
         internal var grantType: String? = null
 
         internal var username: String? = null
@@ -18,6 +19,8 @@ open class OAuth2Password2Client private constructor(builder: Builder) : OAuth2C
         internal var okHttpClient: OkHttpClient? = null
 
         internal var parameters: Map<String, String>? = null
+
+        public fun withClientSecret(clientSecret: String) = apply { this.clientSecret = clientSecret }
 
         public fun withGrantType(grantType: GrantType) = apply { this.grantType = grantType.toString() }
 
