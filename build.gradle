@@ -1,19 +1,17 @@
 buildscript {
-    ext.kotlin_version = '1.3.21'
+    ext.kotlin_version = '1.3.31'
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.9.3"
     }
 }
 
 plugins {
-    id "com.jfrog.bintray" version "1.7.3"
-    id "com.github.dcendents.android-maven" version "1.5"
+    id 'maven-publish'
 }
 
 allprojects {
@@ -21,35 +19,12 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
-        apply plugin: "com.jfrog.artifactory"
-        apply plugin: 'maven-publish'
-    }
-}
-
-artifactory {
-    contextUrl = "${artifactory_contextUrl}"
-    publish {
-        repository {
-            repoKey = 'gradle-release-local'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true
-        }
-        defaults {
-            publications('aar')
-            publishArtifacts = true
-
-            properties = ['qa.level': 'basic', 'dev.team': 'core']
-            publishPom = true
-        }
-    }
-    resolve {
-        repository {
-            repoKey = 'gradle-release'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true
-
+        maven {
+            url azureArtifactsFeedURL
+            credentials {
+                username "AZURE_ARTIFACTS"
+                password System.getenv("AZURE_ARTIFACTS_ENV_ACCESS_TOKEN") ?: "${azureArtifactsGradleAccessToken}"
+            }
         }
     }
 }

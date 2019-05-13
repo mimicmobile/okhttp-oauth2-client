@@ -1,10 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
 
-def packageName = 'com.pillohealth'
 def libVersion = "3.1.4"
 
 static def getTimestamp() {
@@ -55,10 +53,20 @@ android {
 publishing {
     publications {
         aar(MavenPublication) {
-            groupId packageName
+            groupId 'com.pillohealth'
             version = libVersion
             artifactId project.getName()
             artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            url azureArtifactsFeedURL
+            credentials {
+                username "AZURE_ARTIFACTS"
+                password System.getenv("AZURE_ARTIFACTS_ENV_ACCESS_TOKEN") ?: "${azureArtifactsGradleAccessToken}"
+            }
         }
     }
 }
