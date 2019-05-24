@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven-publish'
 
-def libVersion = "3.1.4"
+def libVersion = "3.1.5"
 
 static def getTimestamp() {
     def currentDate = new Date()
