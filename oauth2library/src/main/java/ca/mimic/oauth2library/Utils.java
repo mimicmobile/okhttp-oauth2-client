@@ -14,7 +14,7 @@ import okhttp3.Route;
 class Utils {
 
     protected static boolean isJsonResponse(Response response) {
-        return response.body() != null && response.body().contentType().subtype().equals("json");
+        return response.body() != null && response.body().contentType() != null && response.body().contentType().subtype().equals("json");
     }
 
     protected static Authenticator getAuthenticator(final OAuth2Client oAuth2Client,
