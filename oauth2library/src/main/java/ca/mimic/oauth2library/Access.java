@@ -2,6 +2,7 @@ package ca.mimic.oauth2library;
 
 import java.io.IOException;
 
+import okhttp3.Authenticator;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -58,7 +59,9 @@ public class Access {
                                               final OkHttpClient okHttpClient,
                                               final Request request,
                                               final AuthState authState) throws IOException {
-        Response response = okHttpClient.newBuilder().authenticator(Utils.getAuthenticator(oAuth2Client, authState))
+
+        Authenticator authenticator = oAuth2Client.getAuthenticator() == null ? Utils.getAuthenticator(oAuth2Client, authState) : oAuth2Client.getAuthenticator();
+        Response response = okHttpClient.newBuilder().authenticator(authenticator)
                 .build().newCall(request).execute();
 
         return new OAuthResponse(response);

@@ -2,6 +2,7 @@ package ca.mimic.oauth2library;
 
 class AuthState {
     protected static final int ACCESS_TOKEN = 0;
+    protected static final int ACCESS_TOKEN_NO_RETRY = 2;
     protected static final int REFRESH_TOKEN = 1;
 
     private static final int NO_AUTH = 0;
@@ -13,6 +14,13 @@ class AuthState {
             NO_AUTH,
             BASIC_AUTH,
             AUTHORIZATION_AUTH,
+            FINAL_AUTH
+    };
+
+
+    private static final int[] ACCESS_STATES_NO_RETRY = new int[]{
+            NO_AUTH,
+            BASIC_AUTH,
             FINAL_AUTH
     };
 
@@ -35,6 +43,8 @@ class AuthState {
             case REFRESH_TOKEN:
                 state = REFRESH_STATES;
                 break;
+        case ACCESS_TOKEN_NO_RETRY:
+            state = ACCESS_STATES_NO_RETRY;
         }
     }
 

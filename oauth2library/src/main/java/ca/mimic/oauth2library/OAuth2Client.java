@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Authenticator;
 import okhttp3.OkHttpClient;
 
 public class OAuth2Client {
@@ -18,6 +19,8 @@ public class OAuth2Client {
     private String username;
     private String password;
 
+    private Authenticator authenticator;
+
     private Map<String, String> parameters;
 
     private OAuth2Client(Builder builder) {
@@ -30,6 +33,7 @@ public class OAuth2Client {
         this.grantType = builder.grantType;
         this.okHttpClient= builder.okHttpClient;
         this.parameters = builder.parameters;
+        this.authenticator = builder.authenticator;
     }
 
     protected String getScope() {
@@ -58,6 +62,10 @@ public class OAuth2Client {
 
     protected String getPassword() {
         return password;
+    }
+
+    protected Authenticator getAuthenticator(){
+        return authenticator;
     }
 
     public OAuthResponse refreshAccessToken(String refreshToken) throws IOException {
@@ -143,6 +151,8 @@ public class OAuth2Client {
         private String username;
         private String password;
 
+        private Authenticator authenticator;
+
         private OkHttpClient okHttpClient;
 
         private Map<String, String> parameters;
@@ -160,6 +170,7 @@ public class OAuth2Client {
         public Builder(String clientId, String clientSecret, String site) {
             this.username = null;
             this.password = null;
+            this.authenticator = null;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.site = site;
@@ -193,6 +204,11 @@ public class OAuth2Client {
 
         public Builder parameters(Map<String, String> parameters) {
             this.parameters = parameters;
+            return this;
+        }
+
+        public Builder authenticator(Authenticator authenticator){
+            this.authenticator = authenticator;
             return this;
         }
 
