@@ -9,6 +9,9 @@
 # Application classes that will be serialized/deserialized over Gson
 -keep class ca.mimic.oauth2library.Token { *; }
 -keepclassmembers class ca.mimic.oauth2library.Token { *; }
+-keepclassmembers class ca.mimic.oauth2library.OAuthError {
+    protected <fields>;
+}
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
 # JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
